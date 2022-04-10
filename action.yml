@@ -1,0 +1,54 @@
+name: Sync branches
+author: Thibault Derousseaux <tibdex@gmail.com>
+description: Automatically merge a repository branch into other branches to keep them in sync.
+inputs:
+  body_template:
+    description: >
+      Lodash template for the syncing PR's body.
+
+      The data properties are:
+        - base: syncing PR's base branch
+        - head: branch to merge into `base`.
+    default: "Sync `<%= base %>` with `<%= head %>`."
+  branches_pattern:
+    description: >
+      Branches matching this minipatch pattern will be synced with the branch from which this action is run.
+
+      If missing, all the protected branches will be synced.
+    required: false
+  head_template:
+    description: >
+      Lodash template for the syncing PR's head branch.
+
+      The data properties are:
+        - base: syncing PR's base branch
+        - head: branch to merge into `base`.
+    default: "sync-<%= base %>-with-<%= head %>"
+  labels_template:
+    description: >
+      Lodash template compiling to a JSON array of labels to add to the syncing PR.
+
+      The data properties are:
+        - base: syncing PR's base branch
+        - head: branch to merge into `base`.
+    default: "[]"
+  github_token:
+    description: Token for the GitHub API.
+    required: true
+  title_template:
+    description: >
+      Lodash template for the syncing PR's title.
+
+      The data properties are:
+        - base: syncing PR's base branch
+        - head: branch to merge into `base`.
+    default: "Sync `<%= base %>` with `<%= head %>`"
+outputs:
+  created_pull_requests:
+    description: A JSON stringified object mapping the base branch of the created pull requests to their number.
+runs:
+  using: node16
+  main: dist/index.js
+branding:
+  icon: git-merge
+  color: purple
