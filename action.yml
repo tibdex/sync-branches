@@ -14,8 +14,11 @@ inputs:
     description: >
       Branches matching this minipatch pattern will be synced with the branch from which this action is run.
 
-      If missing, all the protected branches will be synced.
-    required: false
+      If empty, all the protected branches will be synced.
+    default: ""
+  github_token:
+    description: Token for the GitHub API.
+    required: true
   head_template:
     description: >
       Lodash template for the syncing PR's head branch.
@@ -32,9 +35,6 @@ inputs:
         - base: syncing PR's base branch
         - head: branch to merge into `base`.
     default: "[]"
-  github_token:
-    description: Token for the GitHub API.
-    required: true
   title_template:
     description: >
       Lodash template for the syncing PR's title.
