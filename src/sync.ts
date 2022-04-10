@@ -69,6 +69,8 @@ const syncOnce = async ({
         },
       );
     }
+
+    info(`PR #${number} has been created.`);
   } else {
     const { data: pullRequests } = await octokit.request(
       "GET /repos/{owner}/{repo}/pulls",
@@ -92,6 +94,7 @@ const syncOnce = async ({
         owner,
         repo,
       });
+      info(`PR #${number} has been updated.`);
     } catch (_error: unknown) {
       const error = ensureError(_error);
       logError(error);
@@ -217,7 +220,6 @@ const sync = async ({
           title,
         });
         createdPullRequestBaseBranchToNumber[base] = syncingPullRequestNumber;
-        info(`PR #${syncingPullRequestNumber} has been created.`);
       } catch (_error: unknown) {
         const error = ensureError(_error);
         logError(error);
