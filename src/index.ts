@@ -38,8 +38,8 @@ const run = async () => {
     const token = getInput("github_token", { required: true });
     const octokit = getOctokit(token);
 
-    if (context.payload.action !== "push") {
-      throw new Error(`Unsupported event action: ${context.payload.action}.`);
+    if (context.eventName !== "push") {
+      throw new Error(`Unsupported event: ${context.eventName}.`);
     }
 
     const payload = context.payload as PushEvent;
