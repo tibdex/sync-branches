@@ -11,6 +11,6 @@ jobs:
     if: >
       !github.event.deleted
     steps:
-      - uses: tibdex/sync-branches@v2
+      - uses: tibdex/sync-branches@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
