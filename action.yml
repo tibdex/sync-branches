@@ -12,13 +12,13 @@ inputs:
     default: "Sync `<%= base %>` with `<%= head %>`."
   branches_pattern:
     description: >
-      Branches matching this minipatch pattern will be synced with the branch from which this action is run.
+      Branches matching this `minimatch` pattern will be synced with the branch from which this action is run.
 
       If empty, all the protected branches will be synced.
     default: ""
   github_token:
     description: Token for the GitHub API.
-    required: true
+    default: ${{ github.token }}
   head_template:
     description: >
       Lodash template for the syncing PR's head branch.
